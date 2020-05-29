@@ -34,7 +34,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = ENVIRONMENT == 'development' or os.environ.get('DEBUG', False)
 
 ALLOWED_HOSTS = [
-    '.us-west-2.elb.amazonaws.com',
+    '.us-east-1.elb.amazonaws.com',
     '.compute-1.amazonaws.com',
     'localhost',
 ]
