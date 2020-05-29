@@ -24,7 +24,7 @@ LOAD_ENVS_FROM_FILE = True if os.environ.get('LOAD_ENVS_FROM_FILE', False) == 'T
 
 env_file = 'envs-production.json' if ENVIRONMENT == 'production' else 'envs-staging.json'
 if not LOAD_ENVS_FROM_FILE:
-    S3Environ(bucket='bucket-env', key=env_file)
+    S3Environ(bucket='reddit-envs', key=env_file)
     print("Loading envs from S3: {0}".format(env_file))
 
 ###

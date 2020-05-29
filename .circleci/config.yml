@@ -66,8 +66,8 @@ jobs:
       - run: sudo pip install ecs-deploy awscli
       - run: eval $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email | sed 's|https://||')
       - run: docker build -t reddit-django .
-      - run: docker tag reddit-django:latest $ECR_REPO_STAGING:staging
-      - run: docker push $ECR_REPO_STAGING:staging
+      - run: docker tag reddit-django:latest $ECR_REPO:staging
+      - run: docker push $ECR_REPO:staging
       - run: ecs deploy $AWS_CLUSTER_STAGING $AWS_SERVICE_STAGING --timeout $AWS_TIMEOUT
       - run: python scripts/deploy-cron-tasks.py staging $STAGING_HOURLY_SUMMARY
 
@@ -84,8 +84,8 @@ jobs:
       - run: sudo pip install ecs-deploy awscli
       - run: eval $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email | sed 's|https://||')
       - run: docker build -t reddit-django .
-      - run: docker tag reddit-django:latest $ECR_REPO_PRODUCTION:$CIRCLE_TAG
-      - run: docker push $ECR_REPO_PRODUCTION:$CIRCLE_TAG
+      - run: docker tag reddit-django:latest $ECR_REPO:$CIRCLE_TAG
+      - run: docker push $ECR_REPO:$CIRCLE_TAG
       - run: ecs deploy -t $CIRCLE_TAG $AWS_CLUSTER_PRODUCTION $AWS_SERVICE_PRODUCTION --timeout $AWS_TIMEOUT      
       - run: python scripts/deploy-cron-tasks.py $CIRCLE_TAG $PRODUCTION_HOURLY_SUMMARY
 
